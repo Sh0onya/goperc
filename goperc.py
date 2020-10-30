@@ -36,18 +36,19 @@ def getDifference(dt1, dt2):
 
 def main():
 	dt1 = Date(26, 10, 2020)
+	days = 1500
 	today = date.today() 
 	dt2 = Date(today.day, today.month, today.year)
 	diff = getDifference(dt1, dt2)
-	perc = diff*100/1500
-	for i in tqdm(range(diff), total = 1500, desc ="Progress Bar", leave = True, position = 0,ncols=100):
+	perc = diff*100/days
+	for i in tqdm(range(diff), total = days, desc ="Progress Bar", leave = True, position = 0,ncols=100):
 		if i == 0:
 			system('cls')
 		pass
 	print(perc, "% of the goal is achieved, and a streak of", diff, "days has been reached.")
-	if diff == 1500:
+	if diff == days:
 		print("You have done it mere cheete!!")
-	if diff > 1500:
+	if diff > days:
 		system('cls')
 		print("Bro enjoy yaar!!")
 	k=input("press enter to exit...")

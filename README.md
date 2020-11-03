@@ -4,4 +4,4 @@ Change the initial date and the time (in days) for which you want to continue th
 It will show you the streak, and the part of the goal achieved in percentage with a progress bar.
 ![alt text](https://raw.githubusercontent.com/Sh0onya/goperc/main/goperc_snap.JPG)
 Change the values of highligted variables.
-![alt text](https://raw.githubusercontent.com/Sh0onya/goperc/main/code change.JPG)
+![alt text]("https://raw.githubusercontent.com/Sh0onya/goperc/main/code change.JPG")

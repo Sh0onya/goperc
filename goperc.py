@@ -40,7 +40,6 @@ def main():
 	today = date.today() 
 	dt2 = Date(today.day, today.month, today.year)
 	diff = getDifference(dt1, dt2)
-	diff = 1460
 	perc = diff*100/days
 	rem = days - diff
 	for i in tqdm(range(diff), total = days, desc ="Progress Bar", ncols=100):

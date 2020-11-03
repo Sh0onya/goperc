@@ -40,18 +40,20 @@ def main():
 	today = date.today() 
 	dt2 = Date(today.day, today.month, today.year)
 	diff = getDifference(dt1, dt2)
+	diff = 1460
 	perc = diff*100/days
-	for i in tqdm(range(diff), total = days, desc ="Progress Bar", leave = True, position = 0,ncols=100):
+	rem = days - diff
+	for i in tqdm(range(diff), total = days, desc ="Progress Bar", ncols=100):
 		if i == 0:
 			system('cls')
 		pass
-	print(perc, "% of the goal is achieved, and a streak of", diff, "days has been reached.")
+	print(round(perc,2),"% of the goal is achieved, and a streak of ",diff," days or ",round(diff/7)," weeks or ",round(diff/30.4167)," months has been reached.\nYou have to maintain it for ",rem," days or ",round(rem/7)," weeks or ",round(rem/30.4167)," months more. \nYou must achieve the ",days," days or ",round(days/7)," weeks or ", round(days/30.4167)," months mark.",sep="")
 	if diff == days:
 		print("You have done it mere cheete!!")
 	if diff > days:
 		system('cls')
-		print("Bro enjoy yaar!!")
+		print("Attention don't enjoy, continue the streak!!\nYou have to achive a lot more.")
 	k=input("press enter to exit...")
 
 if __name__=="__main__":
-    main()
+    main()22

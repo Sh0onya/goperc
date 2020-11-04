@@ -38,8 +38,8 @@ def main():
 	dt1 = Date(26, 10, 2020)
 	days = 1500
 	p1 = int(days/10)
-	p2 = int(days/3.3333333333333333333333333)
-	p3 = int(days/1.6666666666666666666666667)
+	p2 = int(days*30/100)
+	p3 = int(days*60/100)
 	today = date.today() 
 	dt2 = Date(today.day, today.month, today.year)
 	diff = getDifference(dt1, dt2)
@@ -47,14 +47,11 @@ def main():
 	perc = diff*100/days
 	rem = days - diff
 	if diff_p1 >= p1:
-		diff_p1 = int(days/10)
+		diff_p1 = p1
 	if diff_p2 >= p2:
-		diff_p2 = int(days/3.3333333333333333333333333)
+		diff_p2 = p2
 	if diff_p3 >= p3:
-		diff_p3 = int(days/1.6666666666666666666666667)
-	x = 101
-	if diff >= 1000:
-		x = 102
+		diff_p3 = p3
 	for i in tqdm(range(diff_p1), total = p1, desc ="Phase 1"):
 		pass
 	for i in tqdm(range(diff_p2), total = p2, desc ="Phase 2"):

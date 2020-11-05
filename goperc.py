@@ -43,6 +43,7 @@ def main():
 	today = date.today() 
 	dt2 = Date(today.day, today.month, today.year)
 	diff = getDifference(dt1, dt2)
+	diff = 1100
 	diff_p1 = diff_p2 = diff_p3 = diff
 	perc = diff*100/days
 	rem = days - diff
@@ -60,19 +61,23 @@ def main():
 		pass
 	for i in tqdm(range(diff), total = days, desc ="Course "):
 		pass
-	print(round(perc,2),"% of the goal is achieved, and a streak of ",diff," days or ",round(diff/7)," weeks or ",round(diff/30.4167)," months has been reached.\nYou have to maintain it for ",rem," days or ",round(rem/7)," weeks or ",round(rem/30.4167)," months more. \nYou must achieve the ",days," days or ",round(days/7)," weeks or ", round(days/30.4167)," months mark.",sep="")
-	if diff >= p1:
-		print("You have successfully completed the first phase. Keep Hustling!!")
-	if diff >= p2:
-		print("You have successfully completed the Second phase. Keep Hustling!!")
+	print("\n",round(perc,2),"% of the goal is achieved, and a streak of ",diff," days or ",round(diff/7)," weeks or ",round(diff/30.4167)," months has been reached.\nYou have to maintain it for ",rem," days or ",round(rem/7)," weeks or ",round(rem/30.4167)," months more. \nYou must achieve the ",days," days or ",round(days/7)," weeks or ", round(days/30.4167)," months mark.",sep="")
+	if diff < p1:
+		print("\nYou are in the first phase. Keep Hustling!!")
+	if diff >= p1 and diff < p2:
+		print("\nYou have successfully completed the first phase, now you are in the second phase. Keep Hustling!!")
+	if diff >= p2 and diff < p3:
+		print("\nYou have successfully completed the Second phase, now you are in the third phase. Keep Hustling!!")
 	if diff >= p3:
-		print("You have successfully completed the Third phase. Keep Hustling!!")
+		print("\nYou have successfully completed the Third phase, now you are in the final phase. Keep Hustling!!")
+
+
 	if diff == days:
-		print("You have done it mere cheeete!!")
+		print("\nYou have done it mere cheeete!!")
 	if diff > days:
 		system('cls')
-		print("Attention!! don't enjoy, continue the streak!!\nYou have to achive a lot more.")
-	k=input("press enter to exit...")
+		print("\nAttention!! don't enjoy, continue the streak!!\nYou have to achive a lot more.")
+	k=input("\npress enter to exit...")
 
 if __name__=="__main__":
     main()

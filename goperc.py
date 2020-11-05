@@ -43,7 +43,6 @@ def main():
 	today = date.today() 
 	dt2 = Date(today.day, today.month, today.year)
 	diff = getDifference(dt1, dt2)
-	diff = 1100
 	diff_p1 = diff_p2 = diff_p3 = diff
 	perc = diff*100/days
 	rem = days - diff

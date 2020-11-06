@@ -43,6 +43,7 @@ def main():
 	today = date.today() 
 	dt2 = Date(today.day, today.month, today.year)
 	diff = getDifference(dt1, dt2)
+	diff = 877
 	diff_p1 = diff_p2 = diff_p3 = diff
 	perc = diff*100/days
 	rem = days - diff
@@ -60,15 +61,18 @@ def main():
 		pass
 	for i in tqdm(range(diff), total = days, desc ="Course "):
 		pass
-	print("\n",round(perc,2),"% of the goal is achieved, and a streak of ",diff," days or ",round(diff/7)," weeks or ",round(diff/30.4167)," months has been reached.\nYou have to maintain it for ",rem," days or ",round(rem/7)," weeks or ",round(rem/30.4167)," months more. \nYou must achieve the ",days," days or ",round(days/7)," weeks or ", round(days/30.4167)," months mark.",sep="")
+	print("\n",round(perc,2),"% of the goal is achieved, and a streak of ",diff," days or ",round(diff/7)," weeks or ",round(diff/30.4167)," months has been reached.\nYou have to maintain it for ",rem," days or ",round(rem/7)," weeks or ",round(rem/30.4167)," months more.",sep="")
 	if diff < p1:
-		print("\nYou are in the first phase. Keep Hustling!!")
+		p1_rem = p1 - diff_p1
+		print("\nYou are in the first phase. Keep Hustling!!\nOnly",p1_rem,"days or",round(p1_rem/7),"weeks or",round(p1_rem/30.4167),"months left to enter the second phase.")
 	if diff >= p1 and diff < p2:
-		print("\nYou have successfully completed the first phase, now you are in the second phase. Keep Hustling!!")
+		p2_rem = p2 - diff_p2
+		print("\nYou have successfully completed the first phase, now you are in the second phase. Keep Hustling!!\nOnly",p2_rem,"days or",round(p2_rem/7),"weeks or",round(p2_rem/30.4167),"months left to enter the third phase.")
 	if diff >= p2 and diff < p3:
-		print("\nYou have successfully completed the Second phase, now you are in the third phase. Keep Hustling!!")
+		p3_rem = p3 - diff_p3
+		print("\nYou have successfully completed the Second phase, now you are in the third phase. Keep Hustling!!\nOnly",p3_rem,"days or",round(p3_rem/7),"weeks or",round(p3_rem/30.4167),"months left to enter the final phase.")
 	if diff >= p3:
-		print("\nYou have successfully completed the Third phase, now you are in the final phase. Keep Hustling!!")
+		print("\nYou have successfully completed the Third phase, now you are in the final phase. Keep Hustling!!\nOnly",rem,"days or",round(rem/7),"weeks or",round(rem/30.4167),"months left for course completion.")
 
 
 	if diff == days:

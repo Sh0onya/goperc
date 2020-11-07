@@ -1,7 +1,7 @@
 from datetime import date
 from tqdm import tqdm 
 from os import system
-from colorama import Fore, Back, Style, init
+from colorama import Fore, Style, init
 
 init(convert=True)
 
@@ -13,7 +13,6 @@ class Date:
 
 monthDays = [31, 28, 31, 30, 31, 30,
 			31, 31, 30, 31, 30, 31]
-
 
 def countLeapYears(d):
 
@@ -41,6 +40,7 @@ def getDifference(dt1, dt2):
 def main():
 	dt1 = Date(26, 10, 2020)
 	days = 1500
+	diff_x = days
 	p1 = int(days/10)
 	p2 = int(days*30/100)
 	p3 = int(days*60/100)
@@ -56,36 +56,49 @@ def main():
 		diff_p2 = p2
 	if diff_p3 >= p3:
 		diff_p3 = p3
-	for i in tqdm(range(diff_p1), total = p1, desc = Fore.MAGENTA+Style.BRIGHT+"Phase 1"):
+	if diff > days:
+		days = diff
+	for i in tqdm(range(diff), total = days, desc = Fore.BLUE+Style.BRIGHT+"Course X"):
 		pass
-	for i in tqdm(range(diff_p2), total = p2, desc = Fore.BLUE+Style.BRIGHT+"Phase 2"):
+	print("\n")
+	for i in tqdm(range(diff_p1), total = p1, desc = Fore.RED+Style.BRIGHT+"Phase 1"):
 		pass
-	for i in tqdm(range(diff_p3), total = p3, desc = Fore.YELLOW+Style.BRIGHT+"Phase 3"):
+	for i in tqdm(range(diff_p2), total = p2, desc = Fore.WHITE+Style.BRIGHT+"Phase 2"):
 		pass
-	for i in tqdm(range(diff), total = days, desc = Fore.RED+Style.BRIGHT+"Course "):
+	for i in tqdm(range(diff_p3), total = p3, desc = Fore.GREEN+Style.BRIGHT+"Phase 3"):
 		pass
 	print(Fore.GREEN+Style.BRIGHT+"\n",round(perc,2),"% of the goal is achieved, and a streak of ",diff," days or ",round(diff/7)," weeks or ",round(diff/30.4167)," months has been reached.",sep="")
 	if diff < days:
-		print(Fore.RED+Style.BRIGHT+"\nYou have to maintain it for ",rem," days or ",round(rem/7)," weeks or ",round(rem/30.4167)," months more.",sep="")
+		print(Fore.BLUE+Style.BRIGHT+"\nYou have to maintain it for ",rem," days or ",round(rem/7)," weeks or ",round(rem/30.4167)," months only.",sep="")
 	if diff < p1:
 		p1_rem = p1 - diff_p1
-		print(Fore.MAGENTA+Style.BRIGHT+"\nYou are in the first phase. Keep Hustling!!\nOnly",p1_rem,"days or",round(p1_rem/7),"weeks or",round(p1_rem/30.4167),"months left to enter the second phase."+Fore.CYAN+Style.BRIGHT)
+		print(Fore.RED+Style.BRIGHT+"\nYou are in the first phase. Keep Hustling!!\nOnly",p1_rem,"days or",round(p1_rem/7),"weeks or",round(p1_rem/30.4167),"months left to enter the second phase."+Fore.CYAN+Style.BRIGHT)
 	if diff >= p1 and diff < p2:
 		p2_rem = p2 - diff_p2
-		print(Fore.BLUE+Style.BRIGHT+"\nYou have successfully completed the first phase, now you are in the second phase. Keep Hustling!!\nOnly",p2_rem,"days or",round(p2_rem/7),"weeks or",round(p2_rem/30.4167),"months left to enter the third phase."+Fore.CYAN+Style.BRIGHT)
+		print(Fore.WHITE+Style.BRIGHT+"\nYou have successfully completed the first phase, now you are in the second phase. Keep Hustling!!\nOnly",p2_rem,"days or",round(p2_rem/7),"weeks or",round(p2_rem/30.4167),"months left to enter the third phase."+Fore.CYAN+Style.BRIGHT)
 	if diff >= p2 and diff < p3:
 		p3_rem = p3 - diff_p3
-		print(Fore.YELLOW+Style.BRIGHT+"\nYou have successfully completed the Second phase, now you are in the third phase. Keep Hustling!!\nOnly",p3_rem,"days or",round(p3_rem/7),"weeks or",round(p3_rem/30.4167),"months left to enter the final phase."+Fore.CYAN+Style.BRIGHT)
+		print(Fore.GREEN+Style.BRIGHT+"\nYou have successfully completed the Second phase, now you are in the third phase. Keep Hustling!!\nOnly",p3_rem,"days or",round(p3_rem/7),"weeks or",round(p3_rem/30.4167),"months left to enter the final phase."+Fore.CYAN+Style.BRIGHT)
 	if diff >= p3 and diff < days:
-		print(Fore.RED+Style.BRIGHT+"\nYou have successfully completed the Third phase, now you are in the final phase. Keep Hustling!!\nOnly",rem,"days or",round(rem/7),"weeks or",round(rem/30.4167),"months left for course completion."+Fore.CYAN+Style.BRIGHT)
+		print(Fore.BLUE+Style.BRIGHT+"\nYou have successfully completed the Third phase, now you are in the final phase. Keep Hustling!!")
 
 
-	if diff == days:
-		print(Fore.CYAN+Style.BRIGHT+"\nYou have done it mere cheeete!!")
-	if diff > days:
+	if diff == days and diff_x == days:
+		print(Fore.BLUE+Style.BRIGHT+"\nYou have done it mere cheeete!!")
+		print(date.today().strftime("%B %d, %Y"),"is the day when you won over your mind!!")
+	if diff_x < days:
 		#system('cls')
-		print(Fore.RED+Style.BRIGHT+"\nAttention!! don't enjoy, continue the streak!!\nYou have to achive a lot more."+Fore.CYAN+Style.BRIGHT)
-	k=input("\npress enter to exit...")
+		print()
+		print(Fore.RED+Style.BRIGHT+"Attention!! don't do it unless you are doing it in the correct manner.\nContinue the streak!!You have to achive a lot more.")
+
+	performed = False
+	if performed:
+		system('cls')
+		print("\n"+Fore.CYAN+Style.BRIGHT+"Congratulations, enjoy!!")
+	
+	print(Fore.CYAN+Style.BRIGHT+"\nPress enter to exit!!")
+	k=input()
+	return k
 
 if __name__=="__main__":
     main()

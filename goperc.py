@@ -1,6 +1,6 @@
 from datetime import date
 from tqdm import tqdm 
-from os import system
+from os import system,path
 from colorama import Fore, Style, init
 
 init(convert=True)
@@ -86,15 +86,27 @@ def main():
 	if diff == days and diff_x == days:
 		print(Fore.BLUE+Style.BRIGHT+"\nYou have done it mere cheeete!!")
 		print(date.today().strftime("%B %d, %Y"),"is the day when you won over your mind!!")
+		wond = open('wond.txt','w')
+		wond.write(date.today().strftime("%B %d, %Y"))
+		wond.close()
 	if diff_x < days:
 		#system('cls')
+		wond = open('wond.txt','r')
 		print()
+		print(wond.read(),"is the day when you won over your mind!!\n")
+		wond.close()
 		print(Fore.RED+Style.BRIGHT+"Attention!! don't do it unless you are doing it in the correct manner.\nContinue the streak!!You have to achive a lot more.")
 
 	performed = False
 	if performed:
 		system('cls')
 		print("\n"+Fore.CYAN+Style.BRIGHT+"Congratulations, enjoy!!")
+		exist = path.exists('wond.txt')
+		if exist:
+			wond = open('wond.txt','r')
+			print("\nAlways remember",wond.read(),"is the day when you won over your mind!!")
+			wond.close()
+		
 	
 	print(Fore.CYAN+Style.BRIGHT+"\nPress enter to exit!!")
 	k=input()

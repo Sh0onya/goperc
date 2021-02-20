@@ -1,7 +1,8 @@
-from datetime import date
+from datetime import date, datetime
 from tqdm import tqdm 
 from os import system,path
 from colorama import Fore, Style, init
+
 
 init(convert=True)
 
@@ -37,9 +38,30 @@ def getDifference(dt1, dt2):
 	n2 += countLeapYears(dt2)	
 	return (n2 - n1)
 
+
 def main():
-	dt1 = Date(26, 10, 2020)
-	days = 1500
+	#dt1 = Date(26, 10, 2020)
+	#dt1 = Date(28, 11, 2020)
+	#dt1 = Date(25, 12, 2020)
+	dt1 = Date(21, 2, 2021)
+	goal = 1500
+	my_date = datetime(dt1.y,dt1.m,dt1.d)
+	idayTstamp = datetime.timestamp(my_date)
+	days = goal
+	goalTstamp = goal*24*60*60
+	fDay = datetime.fromtimestamp(goalTstamp-24*60*60+idayTstamp)
+	fDay = fDay.strftime("%d %B, %Y")
+	iDay = my_date.strftime("%d %B, %Y")
+	fpfDay = datetime.fromtimestamp((goalTstamp-24*60*60)*0.1+idayTstamp)
+	fpfDay = fpfDay.strftime("%d %B, %Y")
+	spiDay = datetime.fromtimestamp((goalTstamp)*0.1+idayTstamp)
+	spiDay = spiDay.strftime("%d %B, %Y")
+	spfDay = datetime.fromtimestamp((goalTstamp-24*60*60)*0.3+idayTstamp)
+	spfDay = spfDay.strftime("%d %B, %Y")
+	tpiDay = datetime.fromtimestamp((goalTstamp)*0.3+idayTstamp)
+	tpiDay = tpiDay.strftime("%d %B, %Y")
+	tpfDay = datetime.fromtimestamp((goalTstamp-24*60*60)*0.6+idayTstamp)
+	tpfDay = tpfDay.strftime("%d %B, %Y")
 	diff_x = days
 	p1 = int(days/10)
 	p2 = int(days*30/100)
@@ -67,21 +89,79 @@ def main():
 		pass
 	for i in tqdm(range(diff_p3), total = p3, desc = Fore.GREEN+Style.BRIGHT+"Phase 3"):
 		pass
-	print(Fore.GREEN+Style.BRIGHT+"\n",round(perc,2),"% of the goal is achieved, and a streak of ",diff," days or ",round(diff/7)," weeks or ",round(diff/30.4167)," months has been reached.",sep="")
-	if diff < days:
-		print(Fore.BLUE+Style.BRIGHT+"\nYou have to maintain it for ",rem," days or ",round(rem/7)," weeks or ",round(rem/30.4167)," months only.",sep="")
-	if diff < p1:
-		p1_rem = p1 - diff_p1
-		print(Fore.RED+Style.BRIGHT+"\nYou are in the first phase. Keep Hustling!!\nOnly",p1_rem,"days or",round(p1_rem/7),"weeks or",round(p1_rem/30.4167),"months left to enter the second phase."+Fore.CYAN+Style.BRIGHT)
-	if diff >= p1 and diff < p2:
-		p2_rem = p2 - diff_p2
-		print(Fore.WHITE+Style.BRIGHT+"\nYou have successfully completed the first phase, now you are in the second phase. Keep Hustling!!\nOnly",p2_rem,"days or",round(p2_rem/7),"weeks or",round(p2_rem/30.4167),"months left to enter the third phase."+Fore.CYAN+Style.BRIGHT)
-	if diff >= p2 and diff < p3:
-		p3_rem = p3 - diff_p3
-		print(Fore.GREEN+Style.BRIGHT+"\nYou have successfully completed the Second phase, now you are in the third phase. Keep Hustling!!\nOnly",p3_rem,"days or",round(p3_rem/7),"weeks or",round(p3_rem/30.4167),"months left to enter the final phase."+Fore.CYAN+Style.BRIGHT)
-	if diff >= p3 and diff < days:
-		print(Fore.BLUE+Style.BRIGHT+"\nYou have successfully completed the Third phase, now you are in the final phase. Keep Hustling!!")
 
+	tab = "\t\t\t       "
+	if perc <= 10:
+		tab = "\t\t\t\t       "
+	if perc > 59:
+		tab = "\t\t\t\t       "
+
+	if perc < 0:
+		perc = 0
+
+	print("\nToday's Date:- ",date.today().strftime("%d %B, %Y"))
+	print("Goal:",goal,"Days")
+	print("Today is Day",diff+1)
+	print("\nInitiation Day:-",iDay,"\t\t\tFinal Day:-",fDay)
+	if diff <= goal:
+		print("Goal Achieved: ",round(perc,2),"%",tab,"Goal Left: ",round(100-perc,2),"%")
+		print(Fore.BLUE+Style.BRIGHT+"\nDays Completed: ",diff,"Days","\t\t\t\tDays Left: ",rem,"Days")
+		print("Weeks Completed: ",round(diff/7),"Weeks","\t\t\t\tWeeks Left: ",round(rem/7),"Weeks")
+		print("Months Completed: ",round(diff/30.4167),"Months","\t\t\t\tMonths Left: ",round(rem/30.4167),"Months")
+		print("Years Completed: ",round(diff/365.25),"Years","\t\t\t\tYears Left: ",round(rem/365.25),"Years")
+	else:
+		print("Goal Achieved: ",round(perc,2),"%")
+		print(Fore.BLUE+Style.BRIGHT+"\nDays Completed: ",diff,"Days")
+		print("Weeks Completed: ",round(diff/7),"Weeks")
+		print("Months Completed: ",round(diff/30.4167),"Months")
+		print("Years Completed: ",round(diff/365.25),"Years")
+
+
+	if diff > goal:
+		perc_p1 = diff_p1*100/p1
+		p1_rem = p1 - diff_p1
+		print(Fore.RED+Style.BRIGHT+"\nPhase 1")
+		print("Initiation Day: ",iDay,"\t\t\tFinal Day: ",fpfDay)
+		perc_p2 = diff_p2*100/p2
+		p2_rem = p2 - diff_p2
+		print(Fore.WHITE+Style.BRIGHT+"\nPhase 2")
+		print("Initiation Day: ",spiDay,"\t\t\t\tFinal Day: ",spfDay)
+		perc_p3 = diff_p3*100/p3
+		p3_rem = p3 - diff_p3
+		print(Fore.GREEN+Style.BRIGHT+"\nPhase 3")
+		print("Initiation Day: ",tpiDay,"\t\t\t\tFinal Day: ",tpfDay)
+
+
+	if diff < p1:
+		perc_p1 = diff_p1*100/p1
+		p1_rem = p1 - diff_p1
+		print(Fore.RED+Style.BRIGHT+"\nPhase 1")
+		print("Initiation Day: ",iDay,"\t\t\tFinal Day: ",fpfDay)
+		print("Phase Completed: ",round(perc_p1,2),"%","\t\t\t\tPhase Left: ",round(100-perc_p1,2),"%")
+		print("Days Completed: ",diff_p1,"Days","\t\t\t\tDays Left: ",p1_rem,"Days")
+		print("Weeks Completed: ",round(diff_p1/7),"Weeks","\t\t\t\tWeeks Left: ",round(p1_rem/7),"Weeks")
+		print("Months Completed: ",round(diff_p1/30.4167),"Months","\t\t\t\tMonths Left: ",round(p1_rem/30.4167),"Months")
+		print("Years Completed: ",round(diff_p1/365.25),"Years","\t\t\t\tYears Left: ",round(p1_rem/365.25),"Years")
+	if (diff >= p1 and diff < p2):
+		perc_p2 = diff_p2*100/p2
+		p2_rem = p2 - diff_p2
+		print(Fore.WHITE+Style.BRIGHT+"\nPhase 2")
+		print("Initiation Day: ",spiDay,"\t\t\t\tFinal Day: ",spfDay)
+		print("Phase Completed: ",round(perc_p2,2),"%","\t\t\t\tPhase Left: ",round(100-perc_p2,2),"%")
+		print("Days Completed: ",diff_p2,"Days","\t\t\t\tDays Left: ",p2_rem,"Days")
+		print("Weeks Completed: ",round(diff_p2/7),"Weeks","\t\t\t\tWeeks Left: ",round(p2_rem/7),"Weeks")
+		print("Months Completed: ",round(diff_p2/30.4167),"Months","\t\t\t\tMonths Left: ",round(p2_rem/30.4167),"Months")
+		print("Years Completed: ",round(diff_p2/365.25),"Years","\t\t\t\tYears Left: ",round(p2_rem/365.25),"Years")
+	if (diff >= p2 and diff < p3):
+		perc_p3 = diff_p3*100/p3
+		p3_rem = p3 - diff_p3
+		print(Fore.GREEN+Style.BRIGHT+"\nPhase 3")
+		print("Initiation Day: ",tpiDay,"\t\t\t\tFinal Day: ",tpfDay)
+		print("Phase Completed: ",round(perc_p3,2),"%","\t\t\t\tPhase Left: ",round(100-perc_p3,2),"%")
+		print("Days Completed: ",diff_p3,"Days","\t\t\t\tDays Left: ",p3_rem,"Days")
+		print("Weeks Completed: ",round(diff_p3/7),"Weeks","\t\t\t\tWeeks Left: ",round(p3_rem/7),"Weeks")
+		print("Months Completed: ",round(diff_p3/30.4167),"Months","\t\t\t\tMonths Left: ",round(p3_rem/30.4167),"Months")
+		print("Years Completed: ",round(diff_p3/365.25),"Years","\t\t\t\tYears Left: ",round(p3_rem/365.25),"Years")
 
 	if diff == days and diff_x == days:
 		print(Fore.BLUE+Style.BRIGHT+"\nYou have done it mere cheeete!!")
@@ -98,6 +178,10 @@ def main():
 		print(Fore.RED+Style.BRIGHT+"Attention!! don't do it unless you are doing it in the correct manner.\nContinue the streak!!You have to achive a lot more.")
 
 	performed = False
+	exist = path.exists('performed.txt')
+	if exist:
+		done = open('performed.txt','r')
+		performed = done.read()
 	if performed:
 		system('cls')
 		print("\n"+Fore.CYAN+Style.BRIGHT+"Congratulations, enjoy!!")
@@ -106,10 +190,15 @@ def main():
 			wond = open('wond.txt','r')
 			print("\nAlways remember",wond.read(),"is the day when you won over your mind!!")
 			wond.close()
-		
-	
+
 	print(Fore.CYAN+Style.BRIGHT+"\nPress enter to exit!!")
 	k=input()
+	if k == 'p' or k == 'P':
+		exist = path.exists('performed.txt')
+		if not exist:
+			done = open('performed.txt','w')
+			done.write("True")
+			done.close()
 	return k
 
 if __name__=="__main__":

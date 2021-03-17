@@ -40,10 +40,10 @@ def getDifference(dt1, dt2):
 
 
 def main():
-	#dt1 = Date(26, 10, 2020)
+	#dt1 = Date(26, 10, 2019)
 	#dt1 = Date(28, 11, 2020)
 	#dt1 = Date(25, 12, 2020)
-	dt1 = Date(21, 2, 2021)
+	dt1 = Date(11, 3, 2021)
 	goal = 1500
 	my_date = datetime(dt1.y,dt1.m,dt1.d)
 	idayTstamp = datetime.timestamp(my_date)
@@ -69,6 +69,10 @@ def main():
 	today = date.today() 
 	dt2 = Date(today.day, today.month, today.year)
 	diff = getDifference(dt1, dt2)
+	repeat = (days-diff)/diff
+	repeat_days = repeat - int(repeat)
+	repeat = int(repeat)
+	repeat_days = int(repeat_days*diff)
 	diff_p1 = diff_p2 = diff_p3 = diff
 	perc = diff*100/days
 	rem = days - diff
@@ -98,10 +102,11 @@ def main():
 
 	if perc < 0:
 		perc = 0
-
+	
 	print("\nToday's Date:- ",date.today().strftime("%d %B, %Y"))
 	print("Goal:",goal,"Days")
 	print("Today is Day",diff+1)
+	
 	print("\nInitiation Day:-",iDay,"\t\t\tFinal Day:-",fDay)
 	if diff <= goal:
 		print("Goal Achieved: ",round(perc,2),"%",tab,"Goal Left: ",round(100-perc,2),"%")
@@ -191,6 +196,17 @@ def main():
 			print("\nAlways remember",wond.read(),"is the day when you won over your mind!!")
 			wond.close()
 
+		
+	if(repeat_days > 0):
+		repeat_message = ", with an add on of "+str(repeat_days)+" days."
+	else:
+		repeat_message = "."
+	if(repeat > 1):
+		print(Fore.CYAN+Style.BRIGHT+"\n\nYou have to repeat your achievement",repeat,"more times"+repeat_message)
+	elif(repeat == 1):
+		print(Fore.CYAN+Style.BRIGHT+"\n\nYou have to repeat your achievement",repeat,"more time"+repeat_message)
+	else:
+		print(Fore.CYAN+Style.BRIGHT+"\n\nYou just have to continue it for",repeat_days,"days more.")
 	print(Fore.CYAN+Style.BRIGHT+"\nPress enter to exit!!")
 	k=input()
 	if k == 'p' or k == 'P':

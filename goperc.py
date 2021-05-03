@@ -40,11 +40,11 @@ def getDifference(dt1, dt2):
 
 
 def main():
-	#dt1 = Date(26, 10, 2019)
+	#dt1 = Date(26, 10, 2020)
 	#dt1 = Date(28, 11, 2020)
 	#dt1 = Date(25, 12, 2020)
-	dt1 = Date(11, 3, 2021)
-	goal = 1500
+	dt1 = Date(24, 4, 2021)
+	goal = 1600
 	my_date = datetime(dt1.y,dt1.m,dt1.d)
 	idayTstamp = datetime.timestamp(my_date)
 	days = goal
@@ -69,7 +69,10 @@ def main():
 	today = date.today() 
 	dt2 = Date(today.day, today.month, today.year)
 	diff = getDifference(dt1, dt2)
-	repeat = (days-diff)/diff
+	if diff > 0:
+		repeat = (days-diff)/diff
+	else:
+		repeat = days
 	repeat_days = repeat - int(repeat)
 	repeat = int(repeat)
 	repeat_days = int(repeat_days*diff)
@@ -202,11 +205,11 @@ def main():
 	else:
 		repeat_message = "."
 	if(repeat > 1):
-		print(Fore.CYAN+Style.BRIGHT+"\n\nYou have to repeat your achievement",repeat,"more times"+repeat_message)
+		print(Fore.CYAN+Style.BRIGHT+"\n\nYou have to repeat your achievement",repeat,"times more"+repeat_message)
 	elif(repeat == 1):
 		print(Fore.CYAN+Style.BRIGHT+"\n\nYou have to repeat your achievement",repeat,"more time"+repeat_message)
 	else:
-		print(Fore.CYAN+Style.BRIGHT+"\n\nYou just have to continue it for",repeat_days,"days more.")
+		print(Fore.CYAN+Style.BRIGHT+"\n\nYou just have to achieve",round(repeat_days*100/diff,2),"% of your achievement more.")
 	print(Fore.CYAN+Style.BRIGHT+"\nPress enter to exit!!")
 	k=input()
 	if k == 'p' or k == 'P':
